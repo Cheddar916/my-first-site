@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>IRON&FUEL // Deficit & Fat Loss Tracker</title>
+  <title>IRON&FUEL // Deficit & Workout Tracker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -17,6 +17,7 @@
       --accent-green-glow: rgba(0, 230, 118, 0.25);
       --accent-orange: #ff3d00;
       --accent-cyan: #00e5ff;
+      --accent-purple: #a855f7;
       --text-main: #f1f5f9;
       --text-muted: #64748b;
       --text-dim: #475569;
@@ -43,14 +44,14 @@
 
     /* Header */
     header {
-      background: rgba(18, 20, 29, 0.8);
+      background: rgba(18, 20, 29, 0.9);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
       z-index: 100;
       border-bottom: 1px solid var(--panel-border);
-      padding: 12px 16px;
+      padding: 12px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -59,12 +60,12 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     .brand-logo {
-      width: 24px;
-      height: 24px;
+      width: 26px;
+      height: 26px;
       background: var(--accent-green);
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
       display: inline-block;
@@ -72,7 +73,7 @@
 
     .brand-text {
       font-family: var(--font-heading);
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: 700;
       letter-spacing: 1.5px;
       line-height: 1;
@@ -89,8 +90,8 @@
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 20px;
-      padding: 4px 10px;
-      font-size: 0.7rem;
+      padding: 4px 12px;
+      font-size: 0.75rem;
       font-weight: 600;
       color: var(--accent-cyan);
       letter-spacing: 0.5px;
@@ -105,11 +106,40 @@
       box-shadow: 0 0 8px var(--accent-cyan);
     }
 
-    /* Container */
-    .container {
-      max-width: 500px;
+    /* Multi-Column Responsive Grid Setup */
+    .app-layout {
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 16px;
+      padding: 20px 16px;
+      display: grid;
+      grid-template-columns: 340px 1fr 340px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    /* Fallback layout on smaller displays */
+    @media (max-width: 1100px) {
+      .app-layout {
+        grid-template-columns: 1fr;
+      }
+      .side-panel {
+        order: 2;
+      }
+      .main-panel {
+        order: 1;
+      }
+    }
+
+    /* Side Panels vs Main Center Panel */
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .main-panel {
+      display: flex;
+      flex-direction: column;
     }
 
     /* Timeframe Selector */
@@ -159,15 +189,18 @@
       font-style: italic;
     }
 
-    /* Main Dashboard Rings / Gauge */
-    .dashboard-card {
+    /* Cards */
+    .card {
       background: var(--panel);
       border: 1px solid var(--panel-border);
       border-radius: var(--radius);
       padding: 20px;
-      margin-bottom: 20px;
       position: relative;
       overflow: hidden;
+    }
+
+    .dashboard-card {
+      margin-bottom: 20px;
     }
 
     .dashboard-card::before {
@@ -270,10 +303,6 @@
 
     /* Fat Loss Goal Tracker Card */
     .goal-card {
-      background: var(--panel);
-      border: 1px solid var(--panel-border);
-      border-radius: var(--radius);
-      padding: 16px;
       margin-bottom: 20px;
     }
 
@@ -354,7 +383,7 @@
       transform: scale(0.98);
     }
 
-    /* Form Modal / Collapsible Section */
+    /* Form Collapsible Section */
     .log-form-container {
       background: var(--panel);
       border: 1px solid var(--panel-border);
@@ -412,6 +441,10 @@
 
     .form-control:focus {
       border-color: var(--accent-green);
+    }
+
+    select.form-control {
+      cursor: pointer;
     }
 
     .quick-presets {
@@ -545,7 +578,7 @@
     /* Settings Collapsible */
     .settings-toggle {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 20px;
     }
 
     .btn-link {
@@ -615,6 +648,156 @@
       50% { transform: scale(1.02); }
       100% { transform: scale(1); }
     }
+
+    /* --- WORKOUT SPLIT & CALENDAR SIDE PANELS --- */
+
+    /* Left Side Panel: Split Calendar */
+    .split-header {
+      margin-bottom: 12px;
+    }
+
+    .split-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-cyan);
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-top: 4px;
+      font-weight: 700;
+    }
+
+    .calendar-days {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .day-row {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .day-row.today {
+      border-color: var(--accent-green);
+      background: rgba(0, 230, 118, 0.05);
+    }
+
+    .day-row.active-selected {
+      border-color: var(--accent-cyan);
+      background: rgba(0, 229, 255, 0.08);
+    }
+
+    .day-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .day-name {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    .day-target {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .day-tag {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .tag-push { background: rgba(255, 61, 0, 0.2); color: #ff3d00; border: 1px solid rgba(255, 61, 0, 0.3); }
+    .tag-pull { background: rgba(0, 229, 255, 0.2); color: #00e5ff; border: 1px solid rgba(0, 229, 255, 0.3); }
+    .tag-legs { background: rgba(0, 230, 118, 0.2); color: #00e676; border: 1px solid rgba(0, 230, 118, 0.3); }
+    .tag-rest { background: rgba(100, 116, 139, 0.2); color: #94a3b8; border: 1px solid rgba(100, 116, 139, 0.3); }
+    .tag-upper { background: rgba(168, 85, 247, 0.2); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.3); }
+    .tag-lower { background: rgba(234, 179, 8, 0.2); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.3); }
+    .tag-body { background: rgba(236, 72, 153, 0.2); color: #ec4899; border: 1px solid rgba(236, 72, 153, 0.3); }
+
+    /* Right Side Panel: Workout Journal & Notes */
+    .journal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .journal-day-title {
+      color: var(--accent-cyan);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .journal-textarea {
+      width: 100%;
+      height: 140px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      padding: 12px;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      resize: vertical;
+      outline: none;
+      margin-bottom: 10px;
+    }
+
+    .journal-textarea:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    .notes-history {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+
+    .note-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .note-card-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .note-card-body {
+      font-size: 0.8rem;
+      color: var(--text-main);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
   </style>
 </head>
 <body>
@@ -629,143 +812,193 @@
     </div>
   </header>
 
-  <div class="container">
+  <div class="app-layout">
 
-    <!-- Quote Banner -->
-    <div class="quote-card" id="motivationQuote">
-      "Discipline is choosing between what you want now and what you want most."
+    <!-- LEFT SIDEBAR: WORKOUT SPLIT CALENDAR -->
+    <div class="side-panel">
+      <div class="card">
+        <div class="split-header">
+          <div class="section-title">Workout Split</div>
+          <div class="split-badge" id="currentSplitLabel">Push / Pull / Legs</div>
+        </div>
+
+        <div class="form-group" style="margin-top: 12px;">
+          <label>Select Training Program</label>
+          <select id="splitSelector" class="form-control" onchange="changeWorkoutSplit(this.value)">
+            <option value="PPL_UL">Push / Pull / Legs / Rest / Upper / Lower (6-Day)</option>
+            <option value="BRO_SPLIT">Bro Split: Individual Muscle Groups (5-Day)</option>
+            <option value="UPPER_LOWER">Upper / Lower / Upper / Lower (4-Day)</option>
+            <option value="PPL_PPL">Push / Pull / Legs / Push / Pull / Legs (6-Day)</option>
+          </select>
+        </div>
+
+        <div class="calendar-days" id="calendarDaysContainer">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
     </div>
 
-    <!-- Timeframe Selection -->
-    <div class="time-selector">
-      <button class="time-btn active" onclick="setTimeframe('today')">Today</button>
-      <button class="time-btn" onclick="setTimeframe('week')">This Week</button>
-      <button class="time-btn" onclick="setTimeframe('month')">This Month</button>
-    </div>
+    <!-- MAIN CENTER PANEL: CALORIE & FAT LOSS TRACKER -->
+    <div class="main-panel">
+      <!-- Quote Banner -->
+      <div class="quote-card" id="motivationQuote">
+        "Discipline is choosing between what you want now and what you want most."
+      </div>
 
-    <!-- Goal Reached Banner -->
-    <div class="goal-reached-toast" id="goalReachedToast">
-      🔥 FAT LOSS GOAL ACHIEVED! You hit your deficit target!
-    </div>
+      <!-- Timeframe Selection -->
+      <div class="time-selector">
+        <button class="time-btn active" onclick="setTimeframe('today')">Today</button>
+        <button class="time-btn" onclick="setTimeframe('week')">This Week</button>
+        <button class="time-btn" onclick="setTimeframe('month')">This Month</button>
+      </div>
 
-    <!-- Main Gauge / Progress Dashboard -->
-    <div class="dashboard-card">
-      <div class="progress-section">
-        <div class="ring-container">
-          <svg viewBox="0 0 180 180">
-            <circle class="ring-bg" cx="90" cy="90" r="80"></circle>
-            <circle class="ring-fill" id="ringProgress" cx="90" cy="90" r="80"></circle>
-          </svg>
-          <div class="ring-center-content">
-            <div class="ring-number" id="primaryStatVal">0</div>
-            <div class="ring-label" id="primaryStatLbl">Calories Left</div>
+      <!-- Goal Reached Banner -->
+      <div class="goal-reached-toast" id="goalReachedToast">
+        🔥 FAT LOSS GOAL ACHIEVED! You hit your deficit target!
+      </div>
+
+      <!-- Main Gauge / Progress Dashboard -->
+      <div class="card dashboard-card">
+        <div class="progress-section">
+          <div class="ring-container">
+            <svg viewBox="0 0 180 180">
+              <circle class="ring-bg" cx="90" cy="90" r="80"></circle>
+              <circle class="ring-fill" id="ringProgress" cx="90" cy="90" r="80"></circle>
+            </svg>
+            <div class="ring-center-content">
+              <div class="ring-number" id="primaryStatVal">0</div>
+              <div class="ring-label" id="primaryStatLbl">Calories Left</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="metric-grid">
+          <div class="metric-item">
+            <div class="val" id="consumedVal">0</div>
+            <div class="lbl">Consumed</div>
+          </div>
+          <div class="metric-item">
+            <div class="val" id="maintenanceVal">2,500</div>
+            <div class="lbl">Maintenance</div>
+          </div>
+          <div class="metric-item">
+            <div class="val" id="deficitVal" style="color: var(--accent-green);">0</div>
+            <div class="lbl">Net Deficit</div>
           </div>
         </div>
       </div>
 
-      <div class="metric-grid">
-        <div class="metric-item">
-          <div class="val" id="consumedVal">0</div>
-          <div class="lbl">Consumed</div>
-        </div>
-        <div class="metric-item">
-          <div class="val" id="maintenanceVal">2,500</div>
-          <div class="lbl">Maintenance</div>
-        </div>
-        <div class="metric-item">
-          <div class="val" id="deficitVal" style="color: var(--accent-green);">0</div>
-          <div class="lbl">Net Deficit</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Overall Fat Loss Goal Tracker Card -->
-    <div class="goal-card">
-      <div class="goal-header">
-        <div class="goal-title">
-          <span>⚡</span> Fat Loss Goal Finish Line
-        </div>
-        <div class="goal-stats" id="fatGoalStats">0.0 / 5.0 lbs</div>
-      </div>
-      <div class="bar-bg">
-        <div class="bar-fill" id="fatGoalBar"></div>
-      </div>
-      <div class="goal-footer">
-        <span id="fatRemainingVal">17,500 deficit calories needed</span>
-        <span id="fatPercentVal">0%</span>
-      </div>
-    </div>
-
-    <!-- Quick Action to Add Meal -->
-    <button class="btn-add-trigger" onclick="toggleForm()">
-      <span>+</span> Log Fuel / Meal
-    </button>
-
-    <!-- Quick Meal Logging Form -->
-    <div class="log-form-container" id="logForm">
-      <div class="form-title">Submit Entry</div>
-      <form id="mealForm" onsubmit="handleMealSubmit(event)">
-        <div class="form-group">
-          <label>Meal / Item Name</label>
-          <input type="text" id="mealName" class="form-control" placeholder="e.g. Steak & Rice, Protein Shake" required>
-          <div class="quick-presets">
-            <button type="button" class="preset-btn" onclick="fillPreset('Chicken & Rice', 550)">🍗 Chicken & Rice</button>
-            <button type="button" class="preset-btn" onclick="fillPreset('Protein Shake', 250)">🥤 Protein Shake</button>
-            <button type="button" class="preset-btn" onclick="fillPreset('Eggs & Toast', 400)">🍳 Eggs & Toast</button>
-            <button type="button" class="preset-btn" onclick="fillPreset('Snack', 150)">🍎 Snack</button>
+      <!-- Overall Fat Loss Goal Tracker Card -->
+      <div class="card goal-card">
+        <div class="goal-header">
+          <div class="goal-title">
+            <span>⚡</span> Fat Loss Goal Finish Line
           </div>
+          <div class="goal-stats" id="fatGoalStats">0.0 / 5.0 lbs</div>
         </div>
-        <div class="form-row">
+        <div class="bar-bg">
+          <div class="bar-fill" id="fatGoalBar"></div>
+        </div>
+        <div class="goal-footer">
+          <span id="fatRemainingVal">17,500 deficit calories needed</span>
+          <span id="fatPercentVal">0%</span>
+        </div>
+      </div>
+
+      <!-- Quick Action to Add Meal -->
+      <button class="btn-add-trigger" onclick="toggleForm()">
+        <span>+</span> Log Fuel / Meal
+      </button>
+
+      <!-- Quick Meal Logging Form -->
+      <div class="log-form-container" id="logForm">
+        <div class="form-title">Submit Entry</div>
+        <form id="mealForm" onsubmit="handleMealSubmit(event)">
           <div class="form-group">
-            <label>Calories (kcal)</label>
-            <input type="number" id="mealCals" class="form-control" placeholder="600" min="1" required>
+            <label>Meal / Item Name</label>
+            <input type="text" id="mealName" class="form-control" placeholder="e.g. Steak & Rice, Protein Shake" required>
+            <div class="quick-presets">
+              <button type="button" class="preset-btn" onclick="fillPreset('Chicken & Rice', 550)">🍗 Chicken & Rice</button>
+              <button type="button" class="preset-btn" onclick="fillPreset('Protein Shake', 250)">🥤 Protein Shake</button>
+              <button type="button" class="preset-btn" onclick="fillPreset('Eggs & Toast', 400)">🍳 Eggs & Toast</button>
+              <button type="button" class="preset-btn" onclick="fillPreset('Snack', 150)">🍎 Snack</button>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Calories (kcal)</label>
+              <input type="number" id="mealCals" class="form-control" placeholder="600" min="1" required>
+            </div>
+            <div class="form-group">
+              <label>Protein (g) <span style="text-transform:none; color: var(--text-dim);">(optional)</span></label>
+              <input type="number" id="mealProtein" class="form-control" placeholder="40">
+            </div>
+          </div>
+          <button type="submit" class="btn-submit">LOG MEAL</button>
+        </form>
+      </div>
+
+      <!-- Recent Entries Section -->
+      <div class="section-header">
+        <div class="section-title" id="logsTitle">Today's Logs</div>
+      </div>
+      <div class="log-list" id="logList">
+        <!-- Items dynamically populated -->
+      </div>
+
+      <!-- Settings Toggle -->
+      <div class="settings-toggle">
+        <button class="btn-link" onclick="toggleSettings()">⚙️ Adjust Targets & Settings</button>
+      </div>
+
+      <!-- Settings Panel -->
+      <div class="settings-panel" id="settingsPanel">
+        <div class="form-title">Personal Metrics & Target</div>
+        <form onsubmit="handleSettingsSave(event)">
+          <div class="form-group">
+            <label>Daily Maintenance Calories (TDEE)</label>
+            <input type="number" id="settingMaintenance" class="form-control" required>
           </div>
           <div class="form-group">
-            <label>Protein (g) <span style="text-transform:none; color: var(--text-dim);">(optional)</span></label>
-            <input type="number" id="mealProtein" class="form-control" placeholder="40">
+            <label>Target Daily Calorie Intake (For Fat Loss)</label>
+            <input type="number" id="settingTarget" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Fat Loss Goal Target (lbs of fat)</label>
+            <input type="number" step="0.5" id="settingFatGoal" class="form-control" required>
+            <small style="color: var(--text-muted); font-size: 0.7rem; display:block; margin-top: 4px;">
+              1 lb of fat = ~3,500 kcal deficit
+            </small>
+          </div>
+          <button type="submit" class="btn-submit">SAVE PARAMETERS</button>
+        </form>
+
+        <div class="data-actions">
+          <button type="button" class="btn-outline-danger" onclick="clearAllData()">Reset All Data</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDEBAR: WORKOUT JOURNAL & REMINDERS -->
+    <div class="side-panel">
+      <div class="card">
+        <div class="journal-header">
+          <div class="section-title">Gym Journal</div>
+          <div class="journal-day-title" id="selectedDayJournalLabel">TODAY</div>
+        </div>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 12px;">
+          Record PRs, workout notes, or set reminders for <span id="selectedDayNameLabel" style="color:#fff; font-weight:700;">Monday</span>:
+        </p>
+
+        <textarea id="journalInput" class="journal-textarea" placeholder="e.g., Bench Press: 225lbs x 5 reps. Felt strong. Remember to stretch shoulders after..."></textarea>
+        <button type="button" class="btn-submit" onclick="saveJournalNote()">SAVE DAY NOTE</button>
+
+        <div style="margin-top: 24px;">
+          <div class="section-title" style="font-size: 1.1rem;">Recorded Journal Entries</div>
+          <div class="notes-history" id="notesHistoryContainer">
+            <!-- Dynamically populated notes -->
           </div>
         </div>
-        <button type="submit" class="btn-submit">LOG MEAL</button>
-      </form>
-    </div>
-
-    <!-- Recent Entries Section -->
-    <div class="section-header">
-      <div class="section-title" id="logsTitle">Today's Logs</div>
-    </div>
-    <div class="log-list" id="logList">
-      <!-- Items dynamically populated -->
-    </div>
-
-    <!-- Settings Toggle -->
-    <div class="settings-toggle">
-      <button class="btn-link" onclick="toggleSettings()">⚙️ Adjust Targets & Settings</button>
-    </div>
-
-    <!-- Settings Panel -->
-    <div class="settings-panel" id="settingsPanel">
-      <div class="form-title">Personal Metrics & Target</div>
-      <form onsubmit="handleSettingsSave(event)">
-        <div class="form-group">
-          <label>Daily Maintenance Calories (TDEE)</label>
-          <input type="number" id="settingMaintenance" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label>Target Daily Calorie Intake (For Fat Loss)</label>
-          <input type="number" id="settingTarget" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label>Fat Loss Goal Target (lbs of fat)</label>
-          <input type="number" step="0.5" id="settingFatGoal" class="form-control" required>
-          <small style="color: var(--text-muted); font-size: 0.7rem; display:block; margin-top: 4px;">
-            1 lb of fat = ~3,500 kcal deficit
-          </small>
-        </div>
-        <button type="submit" class="btn-submit">SAVE PARAMETERS</button>
-      </form>
-
-      <div class="data-actions">
-        <button type="button" class="btn-outline-danger" onclick="clearAllData()">Reset All Data</button>
       </div>
     </div>
 
@@ -782,34 +1015,125 @@
       "\"Fuel your body with intention. Build the vision.\""
     ];
 
-    // Core State Management (Stored locally on-device)
+    // Workout Splits Preset Definitions
+    const WORKOUT_SPLITS = {
+      'PPL_UL': {
+        name: 'Push / Pull / Legs / Rest / Upper / Lower',
+        days: [
+          { day: 'Monday', label: 'Push', tagClass: 'tag-push' },
+          { day: 'Tuesday', label: 'Pull', tagClass: 'tag-pull' },
+          { day: 'Wednesday', label: 'Legs', tagClass: 'tag-legs' },
+          { day: 'Thursday', label: 'Rest', tagClass: 'tag-rest' },
+          { day: 'Friday', label: 'Upper Body', tagClass: 'tag-upper' },
+          { day: 'Saturday', label: 'Lower Body', tagClass: 'tag-lower' },
+          { day: 'Sunday', label: 'Rest', tagClass: 'tag-rest' }
+        ]
+      },
+      'BRO_SPLIT': {
+        name: 'Bro Split (Individual Muscle Groups)',
+        days: [
+          { day: 'Monday', label: 'Chest', tagClass: 'tag-push' },
+          { day: 'Tuesday', label: 'Back', tagClass: 'tag-pull' },
+          { day: 'Wednesday', label: 'Arms', tagClass: 'tag-upper' },
+          { day: 'Thursday', label: 'Legs', tagClass: 'tag-legs' },
+          { day: 'Friday', label: 'Shoulders', tagClass: 'tag-body' },
+          { day: 'Saturday', label: 'Rest / Active Rec', tagClass: 'tag-rest' },
+          { day: 'Sunday', label: 'Rest', tagClass: 'tag-rest' }
+        ]
+      },
+      'UPPER_LOWER': {
+        name: 'Upper / Lower / Upper / Lower',
+        days: [
+          { day: 'Monday', label: 'Upper Body', tagClass: 'tag-upper' },
+          { day: 'Tuesday', label: 'Lower Body', tagClass: 'tag-lower' },
+          { day: 'Wednesday', label: 'Rest', tagClass: 'tag-rest' },
+          { day: 'Thursday', label: 'Upper Body', tagClass: 'tag-upper' },
+          { day: 'Friday', label: 'Lower Body', tagClass: 'tag-lower' },
+          { day: 'Saturday', label: 'Rest / Cardio', tagClass: 'tag-rest' },
+          { day: 'Sunday', label: 'Rest', tagClass: 'tag-rest' }
+        ]
+      },
+      'PPL_PPL': {
+        name: 'Push / Pull / Legs (6-Day)',
+        days: [
+          { day: 'Monday', label: 'Push', tagClass: 'tag-push' },
+          { day: 'Tuesday', label: 'Pull', tagClass: 'tag-pull' },
+          { day: 'Wednesday', label: 'Legs', tagClass: 'tag-legs' },
+          { day: 'Thursday', label: 'Push', tagClass: 'tag-push' },
+          { day: 'Friday', label: 'Pull', tagClass: 'tag-pull' },
+          { day: 'Saturday', label: 'Legs', tagClass: 'tag-legs' },
+          { day: 'Sunday', label: 'Rest', tagClass: 'tag-rest' }
+        ]
+      }
+    };
+
+    // Core State Management
     const DEFAULT_SETTINGS = {
       maintenance: 2500,
-      target: 2000, // Default 500 kcal deficit
-      fatGoalLbs: 5.0
+      target: 2000,
+      fatGoalLbs: 5.0,
+      splitKey: 'PPL_UL'
     };
 
     let settings = JSON.parse(localStorage.getItem('iron_fuel_settings')) || DEFAULT_SETTINGS;
     let logs = JSON.parse(localStorage.getItem('iron_fuel_logs')) || [];
+    let journalNotes = JSON.parse(localStorage.getItem('iron_fuel_notes')) || {}; // Keyed by Day Name e.g. "Monday"
     let currentFrame = 'today';
+    let selectedDayName = getTodayName();
 
     // Init App
     document.addEventListener('DOMContentLoaded', () => {
-      // Set random quote
       document.getElementById('motivationQuote').innerText = quotes[Math.floor(Math.random() * quotes.length)];
       
-      // Load Settings into Inputs
+      // Load Settings
       document.getElementById('settingMaintenance').value = settings.maintenance;
       document.getElementById('settingTarget').value = settings.target;
       document.getElementById('settingFatGoal').value = settings.fatGoalLbs;
+      document.getElementById('splitSelector').value = settings.splitKey || 'PPL_UL';
 
       render();
+      selectDayForJournal(getTodayName());
     });
+
+    function getTodayName() {
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      return days[new Date().getDay()];
+    }
 
     function saveState() {
       localStorage.setItem('iron_fuel_settings', JSON.stringify(settings));
       localStorage.setItem('iron_fuel_logs', JSON.stringify(logs));
+      localStorage.setItem('iron_fuel_notes', JSON.stringify(journalNotes));
       render();
+    }
+
+    function changeWorkoutSplit(key) {
+      settings.splitKey = key;
+      saveState();
+    }
+
+    function selectDayForJournal(dayName) {
+      selectedDayName = dayName;
+      document.getElementById('selectedDayNameLabel').innerText = dayName;
+      document.getElementById('selectedDayJournalLabel').innerText = dayName.toUpperCase();
+      
+      // Fill textarea if note exists
+      const currentNote = journalNotes[dayName] || '';
+      document.getElementById('journalInput').value = currentNote;
+
+      // Highlight active day in UI
+      renderCalendar();
+    }
+
+    function saveJournalNote() {
+      const text = document.getElementById('journalInput').value.trim();
+      if (text) {
+        journalNotes[selectedDayName] = text;
+      } else {
+        delete journalNotes[selectedDayName];
+      }
+      saveState();
+      renderNotesHistory();
     }
 
     function setTimeframe(frame) {
@@ -865,7 +1189,6 @@
       logs.unshift(newLog);
       saveState();
 
-      // Reset form
       document.getElementById('mealForm').reset();
       toggleForm();
     }
@@ -886,10 +1209,11 @@
     }
 
     function clearAllData() {
-      if (confirm("Are you sure you want to wipe all logs and settings? This stays on your device and cannot be undone.")) {
+      if (confirm("Are you sure you want to wipe all logs, workout notes, and settings? This stays on your device and cannot be undone.")) {
         localStorage.clear();
         settings = DEFAULT_SETTINGS;
         logs = [];
+        journalNotes = {};
         saveState();
         toggleSettings();
       }
@@ -929,8 +1253,6 @@
     }
 
     function calculateTotalDeficit() {
-      // Calculate total cumulative calorie deficit across ALL logged days
-      // Group logs by day
       const days = {};
       logs.forEach(log => {
         const dateKey = new Date(log.timestamp).toDateString();
@@ -949,14 +1271,60 @@
       return totalDeficit;
     }
 
+    // Render Calendar Split Column
+    function renderCalendar() {
+      const splitConfig = WORKOUT_SPLITS[settings.splitKey || 'PPL_UL'];
+      document.getElementById('currentSplitLabel').innerText = splitConfig.name;
+
+      const container = document.getElementById('calendarDaysContainer');
+      const today = getTodayName();
+
+      container.innerHTML = splitConfig.days.map(item => {
+        const isToday = item.day === today;
+        const isSelected = item.day === selectedDayName;
+        const hasNote = !!journalNotes[item.day];
+
+        return `
+          <div class="day-row ${isToday ? 'today' : ''} ${isSelected ? 'active-selected' : ''}" onclick="selectDayForJournal('${item.day}')">
+            <div class="day-info">
+              <div class="day-name">${item.day} ${isToday ? '• TODAY' : ''} ${hasNote ? '📝' : ''}</div>
+              <div class="day-target">${item.label}</div>
+            </div>
+            <span class="day-tag ${item.tagClass}">${item.label}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Render Journal Notes History
+    function renderNotesHistory() {
+      const container = document.getElementById('notesHistoryContainer');
+      const keys = Object.keys(journalNotes);
+
+      if (keys.length === 0) {
+        container.innerHTML = `<div class="empty-state" style="padding: 15px;">No journal entries saved yet. Select a day to record notes or set workout reminders.</div>`;
+        return;
+      }
+
+      container.innerHTML = keys.map(dayKey => `
+        <div class="note-card">
+          <div class="note-card-header">
+            <span>${dayKey.toUpperCase()}</span>
+            <span style="color: var(--accent-cyan); cursor: pointer;" onclick="selectDayForJournal('${dayKey}')">Edit</span>
+          </div>
+          <div class="note-card-body">${escapeHtml(journalNotes[dayKey])}</div>
+        </div>
+      `).join('');
+    }
+
     // Main Render Function
     function render() {
+      renderCalendar();
+      renderNotesHistory();
+
       const filteredLogs = getFilteredLogs();
-      
-      // Calculate calories for timeframe
       const totalConsumed = filteredLogs.reduce((sum, item) => sum + item.calories, 0);
 
-      // Adjust multiplier based on timeframe
       let multiplier = 1;
       if (currentFrame === 'week') multiplier = 7;
       if (currentFrame === 'month') multiplier = 30;
@@ -967,7 +1335,6 @@
       const caloriesRemaining = Math.max(0, targetCap - totalConsumed);
       const netDeficit = maintenanceCap - totalConsumed;
 
-      // Update Gauge Metrics
       document.getElementById('primaryStatVal').innerText = caloriesRemaining.toLocaleString();
       document.getElementById('primaryStatLbl').innerText = currentFrame === 'today' ? 'Calories Left Today' : 'Allowance Left';
       document.getElementById('consumedVal').innerText = totalConsumed.toLocaleString();
@@ -980,7 +1347,7 @@
       // Ring SVG calculation
       const circle = document.getElementById('ringProgress');
       const radius = circle.r.baseVal.value;
-      const circumference = 2 * Math.PI * radius; // 502.65
+      const circumference = 2 * Math.PI * radius;
       const pct = Math.min(1, Math.max(0, totalConsumed / targetCap));
       const strokeOffset = circumference - (pct * circumference);
       circle.style.strokeDashoffset = strokeOffset;
@@ -988,7 +1355,7 @@
 
       // Fat Loss Goal Calculations
       const totalDeficitAllTime = calculateTotalDeficit();
-      const targetDeficitTotal = settings.fatGoalLbs * 3500; // 3500 kcal per lb
+      const targetDeficitTotal = settings.fatGoalLbs * 3500;
       const lbsLost = (totalDeficitAllTime / 3500).toFixed(1);
       const goalPct = Math.min(100, Math.round((totalDeficitAllTime / targetDeficitTotal) * 100));
 
@@ -1009,7 +1376,7 @@
         toast.classList.remove('active');
       }
 
-      // Render Logs
+      // Render Logs List
       const listContainer = document.getElementById('logList');
       if (filteredLogs.length === 0) {
         listContainer.innerHTML = `
