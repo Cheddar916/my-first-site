@@ -2,516 +2,1051 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alex Morgan | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>IRON&FUEL // Deficit & Fat Loss Tracker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0b0f17;
-      --card-bg: rgba(255, 255, 255, 0.03);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --card-hover: rgba(255, 255, 255, 0.06);
+      --bg: #090a0f;
+      --panel: #12141d;
+      --panel-border: rgba(255, 255, 255, 0.08);
+      --panel-hover: #181b27;
+      --accent-green: #00e676;
+      --accent-green-glow: rgba(0, 230, 118, 0.25);
+      --accent-orange: #ff3d00;
+      --accent-cyan: #00e5ff;
       --text-main: #f1f5f9;
-      --text-muted: #94a3b8;
-      --accent: #6366f1;
-      --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-      --max-width: 1000px;
-      --radius: 16px;
+      --text-muted: #64748b;
+      --text-dim: #475569;
+      --radius: 12px;
+      --font-heading: 'Teko', sans-serif;
+      --font-body: 'Inter', sans-serif;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: var(--font-body);
       background-color: var(--bg);
       color: var(--text-main);
-      line-height: 1.6;
-      padding: 0 1.5rem;
-      overflow-x: hidden;
+      line-height: 1.4;
+      padding-bottom: 30px;
+      min-height: 100vh;
     }
 
-    .background-glow {
-      position: fixed;
+    /* Header */
+    header {
+      background: rgba(18, 20, 29, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      position: sticky;
       top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .glow-1 {
-      position: absolute;
-      top: -10%;
-      left: 20%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0,0,0,0) 70%);
-      border-radius: 50%;
-    }
-
-    .glow-2 {
-      position: absolute;
-      top: 30%;
-      right: 10%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, rgba(0,0,0,0) 70%);
-      border-radius: 50%;
-    }
-
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 2rem 0 4rem;
-    }
-
-    /* Navigation */
-    nav {
+      z-index: 100;
+      border-bottom: 1px solid var(--panel-border);
+      padding: 12px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.5rem 0;
-      margin-bottom: 4rem;
     }
 
-    .logo {
-      font-weight: 800;
-      font-size: 1.25rem;
-      letter-spacing: -0.02em;
-      background: var(--accent-gradient);
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-logo {
+      width: 24px;
+      height: 24px;
+      background: var(--accent-green);
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      display: inline-block;
+    }
+
+    .brand-text {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      line-height: 1;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .nav-links {
+    .privacy-badge {
       display: flex;
-      gap: 1.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--text-main);
-    }
-
-    /* Hero Section */
-    .hero {
-      margin-bottom: 6rem;
-      max-width: 750px;
-    }
-
-    .badge {
-      display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.35rem 0.85rem;
-      background: rgba(99, 102, 241, 0.1);
-      border: 1px solid rgba(99, 102, 241, 0.2);
-      border-radius: 99px;
-      font-size: 0.85rem;
-      color: #818cf8;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-size: 0.7rem;
       font-weight: 600;
-      margin-bottom: 1.5rem;
+      color: var(--accent-cyan);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
     }
 
-    .badge-dot {
-      width: 8px;
-      height: 8px;
-      background-color: #34d399;
+    .privacy-dot {
+      width: 6px;
+      height: 6px;
+      background-color: var(--accent-cyan);
       border-radius: 50%;
-      box-shadow: 0 0 8px #34d399;
+      box-shadow: 0 0 8px var(--accent-cyan);
     }
 
-    h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.5rem;
+    /* Container */
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 16px;
     }
 
-    .hero p {
-      font-size: 1.2rem;
+    /* Timeframe Selector */
+    .time-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--panel);
+      padding: 4px;
+      border-radius: var(--radius);
+      border: 1px solid var(--panel-border);
+      margin-bottom: 20px;
+    }
+
+    .time-btn {
+      background: transparent;
+      border: none;
       color: var(--text-muted);
-      margin-bottom: 2rem;
-      font-weight: 400;
+      padding: 8px 0;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
 
-    .btn-group {
+    .time-btn.active {
+      background: var(--accent-green);
+      color: #000;
+      box-shadow: 0 0 12px var(--accent-green-glow);
+    }
+
+    /* Quote Banner */
+    .quote-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+      border-left: 3px solid var(--accent-green);
+      border-top: 1px solid var(--panel-border);
+      border-right: 1px solid var(--panel-border);
+      border-bottom: 1px solid var(--panel-border);
+      padding: 12px 16px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin-bottom: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-main);
+      font-style: italic;
+    }
+
+    /* Main Dashboard Rings / Gauge */
+    .dashboard-card {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dashboard-card::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, var(--accent-green-glow) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+    }
+
+    .progress-section {
       display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
     }
 
-    .btn {
-      display: inline-flex;
+    .ring-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    .ring-container svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .ring-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.05);
+      stroke-width: 12;
+    }
+
+    .ring-fill {
+      fill: none;
+      stroke: var(--accent-green);
+      stroke-width: 12;
+      stroke-dasharray: 502;
+      stroke-dashoffset: 502;
+      transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      stroke-linecap: round;
+    }
+
+    .ring-center-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      width: 100%;
+    }
+
+    .ring-number {
+      font-family: var(--font-heading);
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 0.9;
+      color: #fff;
+    }
+
+    .ring-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      text-align: center;
+      border-top: 1px solid var(--panel-border);
+      padding-top: 16px;
+    }
+
+    .metric-item .val {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .metric-item .lbl {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    /* Fat Loss Goal Tracker Card */
+    .goal-card {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .goal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .goal-title {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .goal-stats {
+      font-size: 0.8rem;
+      color: var(--accent-cyan);
+      font-weight: 700;
+    }
+
+    .bar-bg {
+      height: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 7px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00e5ff 0%, var(--accent-green) 100%);
+      width: 0%;
+      transition: width 0.5s ease;
+      border-radius: 7px;
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+    }
+
+    .goal-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Quick Action / Add Meal Button */
+    .btn-add-trigger {
+      width: 100%;
+      background: var(--accent-green);
+      color: #000;
+      border: none;
+      padding: 14px;
+      border-radius: var(--radius);
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 20px var(--accent-green-glow);
+      display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0.8rem 1.6rem;
-      border-radius: 12px;
-      font-weight: 600;
+      gap: 8px;
+      transition: transform 0.1s ease, background 0.2s ease;
+      margin-bottom: 24px;
+    }
+
+    .btn-add-trigger:active {
+      transform: scale(0.98);
+    }
+
+    /* Form Modal / Collapsible Section */
+    .log-form-container {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 24px;
+      display: none;
+    }
+
+    .log-form-container.active {
+      display: block;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-title {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .form-control {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: #fff;
+      font-family: var(--font-body);
       font-size: 0.95rem;
-      text-decoration: none;
-      transition: all 0.2s ease;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-control:focus {
+      border-color: var(--accent-green);
+    }
+
+    .quick-presets {
+      display: flex;
+      gap: 6px;
+      margin-top: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .preset-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--panel-border);
+      color: var(--text-main);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      white-space: nowrap;
       cursor: pointer;
     }
 
-    .btn-primary {
-      background: var(--accent-gradient);
-      color: #fff;
-      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+    .preset-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
     }
 
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(99, 102, 241, 0.4);
-    }
-
-    .btn-secondary {
-      background: var(--card-bg);
-      color: var(--text-main);
-      border: 1px solid var(--card-border);
-    }
-
-    .btn-secondary:hover {
-      background: var(--card-hover);
-      border-color: rgba(255, 255, 255, 0.15);
-      transform: translateY(-2px);
-    }
-
-    /* Section Headers */
-    .section-title {
-      font-size: 1.75rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    /* Projects Grid */
-    .projects {
-      margin-bottom: 6rem;
-    }
-
-    .grid {
+    .form-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
     }
 
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 1.75rem;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      background: var(--card-hover);
-      border-color: rgba(255, 255, 255, 0.15);
-    }
-
-    .card-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-    }
-
-    .card-desc {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
-      flex-grow: 1;
-    }
-
-    .tags {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-    }
-
-    .tag {
-      font-size: 0.75rem;
-      padding: 0.25rem 0.6rem;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 6px;
-      color: var(--text-muted);
-    }
-
-    .card-link {
-      color: var(--text-main);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .card-link:hover {
-      color: var(--accent);
-    }
-
-    /* Experience / About */
-    .about-section {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 3rem;
-      margin-bottom: 6rem;
-    }
-
-    @media (max-width: 768px) {
-      .about-section {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .timeline-item {
-      border-left: 2px solid var(--card-border);
-      padding-left: 1.5rem;
-      position: relative;
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -5px;
-      top: 6px;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-
-    .timeline-date {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 0.25rem;
-    }
-
-    .timeline-role {
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-
-    .timeline-company {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .skills-box {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 1.75rem;
-      height: fit-content;
-    }
-
-    .skills-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-
-    .skill-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .skill-pill {
-      font-size: 0.85rem;
-      padding: 0.4rem 0.8rem;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--card-border);
+    .btn-submit {
+      width: 100%;
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 10px;
       border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      margin-top: 8px;
     }
 
-    /* Contact & Footer */
-    .contact {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
+    /* Logs List */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .log-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .log-item {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
       border-radius: var(--radius);
-      padding: 3rem 2rem;
-      text-align: center;
-      margin-bottom: 4rem;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.2s;
     }
 
-    .contact h2 {
-      font-size: 2rem;
-      margin-bottom: 0.75rem;
+    .log-item:hover {
+      background: var(--panel-hover);
     }
 
-    .contact p {
+    .log-info .log-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #fff;
+    }
+
+    .log-info .log-meta {
+      font-size: 0.75rem;
       color: var(--text-muted);
-      max-width: 500px;
-      margin: 0 auto 1.5rem;
+      margin-top: 2px;
     }
 
-    footer {
+    .log-calories {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent-green);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-delete {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .btn-delete:hover {
+      color: var(--accent-orange);
+    }
+
+    .empty-state {
       text-align: center;
+      padding: 30px;
+      background: var(--panel);
+      border: 1px dashed var(--panel-border);
+      border-radius: var(--radius);
       color: var(--text-muted);
       font-size: 0.85rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--card-border);
+    }
+
+    /* Settings Collapsible */
+    .settings-toggle {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .btn-link {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .settings-panel {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-top: 12px;
+      display: none;
+    }
+
+    .settings-panel.active {
+      display: block;
+    }
+
+    .data-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .btn-outline-danger {
+      background: transparent;
+      border: 1px solid var(--accent-orange);
+      color: var(--accent-orange);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      flex: 1;
+    }
+
+    /* Target Finish Modal / Toast */
+    .goal-reached-toast {
+      background: linear-gradient(135deg, #00e676 0%, #00b0ff 100%);
+      color: #000;
+      padding: 16px;
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 700;
+      display: none;
+      box-shadow: 0 4px 20px rgba(0, 230, 118, 0.4);
+    }
+
+    .goal-reached-toast.active {
+      display: block;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
     }
   </style>
 </head>
 <body>
 
-  <div class="background-glow">
-    <div class="glow-1"></div>
-    <div class="glow-2"></div>
-  </div>
+  <header>
+    <div class="brand">
+      <span class="brand-logo"></span>
+      <span class="brand-text">IRON&FUEL</span>
+    </div>
+    <div class="privacy-badge">
+      <span class="privacy-dot"></span> 100% On-Device
+    </div>
+  </header>
 
   <div class="container">
-    <nav>
-      <div class="logo">AM.</div>
-      <ul class="nav-links">
-        <li><a href="#projects">Work</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
 
-    <header class="hero">
-      <div class="badge">
-        <span class="badge-dot"></span> Available for new projects
-      </div>
-      <h1>Designing & building digital products.</h1>
-      <p>Hi, I'm Alex Morgan—a full-stack developer and designer focused on creating clean, intuitive, and performant web experiences.</p>
-      <div class="btn-group">
-        <a href="#contact" class="btn btn-primary">Get in Touch</a>
-        <a href="#projects" class="btn btn-secondary">View Work</a>
-      </div>
-    </header>
+    <!-- Quote Banner -->
+    <div class="quote-card" id="motivationQuote">
+      "Discipline is choosing between what you want now and what you want most."
+    </div>
 
-    <section id="projects" class="projects">
-      <h2 class="section-title">Selected Projects</h2>
-      <div class="grid">
-        
-        <div class="card">
-          <div>
-            <h3 class="card-title">Nova Analytics</h3>
-            <p class="card-desc">A real-time data visualization dashboard designed for SaaS teams to track key performance metrics.</p>
-            <div class="tags">
-              <span class="tag">TypeScript</span>
-              <span class="tag">React</span>
-              <span class="tag">Tailwind</span>
-            </div>
-          </div>
-          <a href="#" class="card-link">View Project &rarr;</a>
-        </div>
+    <!-- Timeframe Selection -->
+    <div class="time-selector">
+      <button class="time-btn active" onclick="setTimeframe('today')">Today</button>
+      <button class="time-btn" onclick="setTimeframe('week')">This Week</button>
+      <button class="time-btn" onclick="setTimeframe('month')">This Month</button>
+    </div>
 
-        <div class="card">
-          <div>
-            <h3 class="card-title">FlowTask</h3>
-            <p class="card-desc">Minimalist project management tool focused on distraction-free deep work and task execution.</p>
-            <div class="tags">
-              <span class="tag">Node.js</span>
-              <span class="tag">PostgreSQL</span>
-              <span class="tag">Vue</span>
-            </div>
-          </div>
-          <a href="#" class="card-link">View Project &rarr;</a>
-        </div>
+    <!-- Goal Reached Banner -->
+    <div class="goal-reached-toast" id="goalReachedToast">
+      🔥 FAT LOSS GOAL ACHIEVED! You hit your deficit target!
+    </div>
 
-        <div class="card">
-          <div>
-            <h3 class="card-title">Aura Studio</h3>
-            <p class="card-desc">E-commerce storefront and brand identity built for a modern architectural lighting company.</p>
-            <div class="tags">
-              <span class="tag">Next.js</span>
-              <span class="tag">Shopify API</span>
-              <span class="tag">UI/UX</span>
-            </div>
-          </div>
-          <a href="#" class="card-link">View Project &rarr;</a>
-        </div>
-
-      </div>
-    </section>
-
-    <section id="about" class="about-section">
-      <div>
-        <h2 class="section-title">Experience</h2>
-        <div class="timeline">
-          
-          <div class="timeline-item">
-            <div class="timeline-date">2024 — Present</div>
-            <div class="timeline-role">Senior Frontend Engineer</div>
-            <div class="timeline-company">Vortex Labs</div>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">Leading frontend architecture for core web applications and mentoring junior developers.</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-date">2022 — 2024</div>
-            <div class="timeline-role">UI/UX Designer & Developer</div>
-            <div class="timeline-company">Studio Pulse</div>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">Crafted custom web experiences and design systems for early-stage startups.</p>
-          </div>
-
-        </div>
-      </div>
-
-      <div>
-        <div class="skills-box">
-          <h3 class="skills-title">Technologies</h3>
-          <div class="skill-list">
-            <span class="skill-pill">JavaScript</span>
-            <span class="skill-pill">TypeScript</span>
-            <span class="skill-pill">React / Next.js</span>
-            <span class="skill-pill">Node.js</span>
-            <span class="skill-pill">HTML/CSS</span>
-            <span class="skill-pill">PostgreSQL</span>
-            <span class="skill-pill">Figma</span>
-            <span class="skill-pill">Git</span>
+    <!-- Main Gauge / Progress Dashboard -->
+    <div class="dashboard-card">
+      <div class="progress-section">
+        <div class="ring-container">
+          <svg viewBox="0 0 180 180">
+            <circle class="ring-bg" cx="90" cy="90" r="80"></circle>
+            <circle class="ring-fill" id="ringProgress" cx="90" cy="90" r="80"></circle>
+          </svg>
+          <div class="ring-center-content">
+            <div class="ring-number" id="primaryStatVal">0</div>
+            <div class="ring-label" id="primaryStatLbl">Calories Left</div>
           </div>
         </div>
       </div>
-    </section>
 
-    <section id="contact" class="contact">
-      <h2>Let's work together</h2>
-      <p>Have a project in mind or want to talk? Feel free to reach out. I'm always open to discussing new opportunities.</p>
-      <a href="mailto:alex@example.com" class="btn btn-primary">Say Hello</a>
-    </section>
+      <div class="metric-grid">
+        <div class="metric-item">
+          <div class="val" id="consumedVal">0</div>
+          <div class="lbl">Consumed</div>
+        </div>
+        <div class="metric-item">
+          <div class="val" id="maintenanceVal">2,500</div>
+          <div class="lbl">Maintenance</div>
+        </div>
+        <div class="metric-item">
+          <div class="val" id="deficitVal" style="color: var(--accent-green);">0</div>
+          <div class="lbl">Net Deficit</div>
+        </div>
+      </div>
+    </div>
 
-    <footer>
-      <p>&copy; 2026 Alex Morgan. Built with plain HTML & CSS.</p>
-    </footer>
+    <!-- Overall Fat Loss Goal Tracker Card -->
+    <div class="goal-card">
+      <div class="goal-header">
+        <div class="goal-title">
+          <span>⚡</span> Fat Loss Goal Finish Line
+        </div>
+        <div class="goal-stats" id="fatGoalStats">0.0 / 5.0 lbs</div>
+      </div>
+      <div class="bar-bg">
+        <div class="bar-fill" id="fatGoalBar"></div>
+      </div>
+      <div class="goal-footer">
+        <span id="fatRemainingVal">17,500 deficit calories needed</span>
+        <span id="fatPercentVal">0%</span>
+      </div>
+    </div>
+
+    <!-- Quick Action to Add Meal -->
+    <button class="btn-add-trigger" onclick="toggleForm()">
+      <span>+</span> Log Fuel / Meal
+    </button>
+
+    <!-- Quick Meal Logging Form -->
+    <div class="log-form-container" id="logForm">
+      <div class="form-title">Submit Entry</div>
+      <form id="mealForm" onsubmit="handleMealSubmit(event)">
+        <div class="form-group">
+          <label>Meal / Item Name</label>
+          <input type="text" id="mealName" class="form-control" placeholder="e.g. Steak & Rice, Protein Shake" required>
+          <div class="quick-presets">
+            <button type="button" class="preset-btn" onclick="fillPreset('Chicken & Rice', 550)">🍗 Chicken & Rice</button>
+            <button type="button" class="preset-btn" onclick="fillPreset('Protein Shake', 250)">🥤 Protein Shake</button>
+            <button type="button" class="preset-btn" onclick="fillPreset('Eggs & Toast', 400)">🍳 Eggs & Toast</button>
+            <button type="button" class="preset-btn" onclick="fillPreset('Snack', 150)">🍎 Snack</button>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Calories (kcal)</label>
+            <input type="number" id="mealCals" class="form-control" placeholder="600" min="1" required>
+          </div>
+          <div class="form-group">
+            <label>Protein (g) <span style="text-transform:none; color: var(--text-dim);">(optional)</span></label>
+            <input type="number" id="mealProtein" class="form-control" placeholder="40">
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">LOG MEAL</button>
+      </form>
+    </div>
+
+    <!-- Recent Entries Section -->
+    <div class="section-header">
+      <div class="section-title" id="logsTitle">Today's Logs</div>
+    </div>
+    <div class="log-list" id="logList">
+      <!-- Items dynamically populated -->
+    </div>
+
+    <!-- Settings Toggle -->
+    <div class="settings-toggle">
+      <button class="btn-link" onclick="toggleSettings()">⚙️ Adjust Targets & Settings</button>
+    </div>
+
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settingsPanel">
+      <div class="form-title">Personal Metrics & Target</div>
+      <form onsubmit="handleSettingsSave(event)">
+        <div class="form-group">
+          <label>Daily Maintenance Calories (TDEE)</label>
+          <input type="number" id="settingMaintenance" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Target Daily Calorie Intake (For Fat Loss)</label>
+          <input type="number" id="settingTarget" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Fat Loss Goal Target (lbs of fat)</label>
+          <input type="number" step="0.5" id="settingFatGoal" class="form-control" required>
+          <small style="color: var(--text-muted); font-size: 0.7rem; display:block; margin-top: 4px;">
+            1 lb of fat = ~3,500 kcal deficit
+          </small>
+        </div>
+        <button type="submit" class="btn-submit">SAVE PARAMETERS</button>
+      </form>
+
+      <div class="data-actions">
+        <button type="button" class="btn-outline-danger" onclick="clearAllData()">Reset All Data</button>
+      </div>
+    </div>
+
   </div>
 
+  <script>
+    // Motivational Quotes
+    const quotes = [
+      "\"Discipline is choosing between what you want now and what you want most.\"",
+      "\"Suffer the pain of discipline or suffer the pain of regret.\"",
+      "\"Results happen over time, not overnight. Work hard, stay consistent.\"",
+      "\"You don't get what you wish for. You get what you work for.\"",
+      "\"Excuses don't burn calories.\"",
+      "\"Fuel your body with intention. Build the vision.\""
+    ];
+
+    // Core State Management (Stored locally on-device)
+    const DEFAULT_SETTINGS = {
+      maintenance: 2500,
+      target: 2000, // Default 500 kcal deficit
+      fatGoalLbs: 5.0
+    };
+
+    let settings = JSON.parse(localStorage.getItem('iron_fuel_settings')) || DEFAULT_SETTINGS;
+    let logs = JSON.parse(localStorage.getItem('iron_fuel_logs')) || [];
+    let currentFrame = 'today';
+
+    // Init App
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set random quote
+      document.getElementById('motivationQuote').innerText = quotes[Math.floor(Math.random() * quotes.length)];
+      
+      // Load Settings into Inputs
+      document.getElementById('settingMaintenance').value = settings.maintenance;
+      document.getElementById('settingTarget').value = settings.target;
+      document.getElementById('settingFatGoal').value = settings.fatGoalLbs;
+
+      render();
+    });
+
+    function saveState() {
+      localStorage.setItem('iron_fuel_settings', JSON.stringify(settings));
+      localStorage.setItem('iron_fuel_logs', JSON.stringify(logs));
+      render();
+    }
+
+    function setTimeframe(frame) {
+      currentFrame = frame;
+      document.querySelectorAll('.time-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.innerText.toLowerCase().includes(frame));
+      });
+      
+      const titleMap = {
+        'today': "Today's Logs",
+        'week': "This Week's Logs",
+        'month': "This Month's Logs"
+      };
+      document.getElementById('logsTitle').innerText = titleMap[frame];
+
+      render();
+    }
+
+    function toggleForm() {
+      const form = document.getElementById('logForm');
+      form.classList.toggle('active');
+      if (form.classList.contains('active')) {
+        document.getElementById('mealName').focus();
+      }
+    }
+
+    function toggleSettings() {
+      const panel = document.getElementById('settingsPanel');
+      panel.classList.toggle('active');
+    }
+
+    function fillPreset(name, cals) {
+      document.getElementById('mealName').value = name;
+      document.getElementById('mealCals').value = cals;
+    }
+
+    function handleMealSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('mealName').value.trim();
+      const cals = parseInt(document.getElementById('mealCals').value, 10);
+      const protein = parseInt(document.getElementById('mealProtein').value, 10) || 0;
+
+      if (!name || isNaN(cals)) return;
+
+      const newLog = {
+        id: Date.now().toString(),
+        name,
+        calories: cals,
+        protein,
+        timestamp: new Date().toISOString()
+      };
+
+      logs.unshift(newLog);
+      saveState();
+
+      // Reset form
+      document.getElementById('mealForm').reset();
+      toggleForm();
+    }
+
+    function deleteLog(id) {
+      logs = logs.filter(item => item.id !== id);
+      saveState();
+    }
+
+    function handleSettingsSave(e) {
+      e.preventDefault();
+      settings.maintenance = parseInt(document.getElementById('settingMaintenance').value, 10) || 2500;
+      settings.target = parseInt(document.getElementById('settingTarget').value, 10) || 2000;
+      settings.fatGoalLbs = parseFloat(document.getElementById('settingFatGoal').value) || 5.0;
+
+      saveState();
+      toggleSettings();
+    }
+
+    function clearAllData() {
+      if (confirm("Are you sure you want to wipe all logs and settings? This stays on your device and cannot be undone.")) {
+        localStorage.clear();
+        settings = DEFAULT_SETTINGS;
+        logs = [];
+        saveState();
+        toggleSettings();
+      }
+    }
+
+    // Date filtering helpers
+    function isSameDay(d1, d2) {
+      return d1.getFullYear() === d2.getFullYear() &&
+             d1.getMonth() === d2.getMonth() &&
+             d1.getDate() === d2.getDate();
+    }
+
+    function isSameWeek(d1, d2) {
+      const startOfWeek = (d) => {
+        const date = new Date(d);
+        const day = date.getDay();
+        const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+        return new Date(date.setDate(diff));
+      };
+      return startOfWeek(d1).toDateString() === startOfWeek(d2).toDateString();
+    }
+
+    function isSameMonth(d1, d2) {
+      return d1.getFullYear() === d2.getFullYear() &&
+             d1.getMonth() === d2.getMonth();
+    }
+
+    function getFilteredLogs() {
+      const now = new Date();
+      return logs.filter(log => {
+        const logDate = new Date(log.timestamp);
+        if (currentFrame === 'today') return isSameDay(now, logDate);
+        if (currentFrame === 'week') return isSameWeek(now, logDate);
+        if (currentFrame === 'month') return isSameMonth(now, logDate);
+        return true;
+      });
+    }
+
+    function calculateTotalDeficit() {
+      // Calculate total cumulative calorie deficit across ALL logged days
+      // Group logs by day
+      const days = {};
+      logs.forEach(log => {
+        const dateKey = new Date(log.timestamp).toDateString();
+        days[dateKey] = (days[dateKey] || 0) + log.calories;
+      });
+
+      let totalDeficit = 0;
+      Object.keys(days).forEach(day => {
+        const consumed = days[day];
+        const dayDeficit = settings.maintenance - consumed;
+        if (dayDeficit > 0) {
+          totalDeficit += dayDeficit;
+        }
+      });
+
+      return totalDeficit;
+    }
+
+    // Main Render Function
+    function render() {
+      const filteredLogs = getFilteredLogs();
+      
+      // Calculate calories for timeframe
+      const totalConsumed = filteredLogs.reduce((sum, item) => sum + item.calories, 0);
+
+      // Adjust multiplier based on timeframe
+      let multiplier = 1;
+      if (currentFrame === 'week') multiplier = 7;
+      if (currentFrame === 'month') multiplier = 30;
+
+      const maintenanceCap = settings.maintenance * multiplier;
+      const targetCap = settings.target * multiplier;
+
+      const caloriesRemaining = Math.max(0, targetCap - totalConsumed);
+      const netDeficit = maintenanceCap - totalConsumed;
+
+      // Update Gauge Metrics
+      document.getElementById('primaryStatVal').innerText = caloriesRemaining.toLocaleString();
+      document.getElementById('primaryStatLbl').innerText = currentFrame === 'today' ? 'Calories Left Today' : 'Allowance Left';
+      document.getElementById('consumedVal').innerText = totalConsumed.toLocaleString();
+      document.getElementById('maintenanceVal').innerText = maintenanceCap.toLocaleString();
+      
+      const deficitEl = document.getElementById('deficitVal');
+      deficitEl.innerText = (netDeficit >= 0 ? '+' : '') + netDeficit.toLocaleString();
+      deficitEl.style.color = netDeficit >= 0 ? 'var(--accent-green)' : 'var(--accent-orange)';
+
+      // Ring SVG calculation
+      const circle = document.getElementById('ringProgress');
+      const radius = circle.r.baseVal.value;
+      const circumference = 2 * Math.PI * radius; // 502.65
+      const pct = Math.min(1, Math.max(0, totalConsumed / targetCap));
+      const strokeOffset = circumference - (pct * circumference);
+      circle.style.strokeDashoffset = strokeOffset;
+      circle.style.stroke = totalConsumed > targetCap ? 'var(--accent-orange)' : 'var(--accent-green)';
+
+      // Fat Loss Goal Calculations
+      const totalDeficitAllTime = calculateTotalDeficit();
+      const targetDeficitTotal = settings.fatGoalLbs * 3500; // 3500 kcal per lb
+      const lbsLost = (totalDeficitAllTime / 3500).toFixed(1);
+      const goalPct = Math.min(100, Math.round((totalDeficitAllTime / targetDeficitTotal) * 100));
+
+      document.getElementById('fatGoalStats').innerText = `${lbsLost} / ${settings.fatGoalLbs} lbs`;
+      document.getElementById('fatGoalBar').style.width = `${goalPct}%`;
+      
+      const remainingCalsNeeded = Math.max(0, targetDeficitTotal - totalDeficitAllTime);
+      document.getElementById('fatRemainingVal').innerText = remainingCalsNeeded > 0 
+        ? `${remainingCalsNeeded.toLocaleString()} deficit kcal to goal`
+        : `Goal Achieved!`;
+      document.getElementById('fatPercentVal').innerText = `${goalPct}%`;
+
+      // Goal Reached Toast
+      const toast = document.getElementById('goalReachedToast');
+      if (goalPct >= 100) {
+        toast.classList.add('active');
+      } else {
+        toast.classList.remove('active');
+      }
+
+      // Render Logs
+      const listContainer = document.getElementById('logList');
+      if (filteredLogs.length === 0) {
+        listContainer.innerHTML = `
+          <div class="empty-state">
+            No meals logged for ${currentFrame}. Hit "+ Log Fuel" to record your calories.
+          </div>
+        `;
+      } else {
+        listContainer.innerHTML = filteredLogs.map(item => {
+          const dateStr = new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          return `
+            <div class="log-item">
+              <div class="log-info">
+                <div class="log-name">${escapeHtml(item.name)}</div>
+                <div class="log-meta">${dateStr} ${item.protein ? `• ${item.protein}g protein` : ''}</div>
+              </div>
+              <div class="log-calories">
+                <span>${item.calories}</span>
+                <button class="btn-delete" onclick="deleteLog('${item.id}')" title="Delete">✕</button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/[&<>"']/g, function(m) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        }[m];
+      });
+    }
+  </script>
 </body>
 </html>
