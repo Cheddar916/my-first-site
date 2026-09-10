@@ -15,12 +15,12 @@ after each dash and leave the dashes alone.
 
 ---
 
-- **T &mdash; Thing:** *one sentence. If someone asked "what did you make?", this is the answer*
-- **A &mdash; Audience:** *a specific person, not a category*
-- **R &mdash; Requirements:** *the two or three things that, if missing, make it pointless*
-- **G &mdash; Guardrails:** *what it must never do*
-- **E &mdash; Experience:** *sections in order, one accent color, one site it should feel like*
-- **T &mdash; Test:** *what you would check before showing it to someone whose opinion you care about*
+- **T &mdash; Thing:** Build a tool to track my calories against my maintenance calories needed for me to lose weight. 
+- **A &mdash; Audience:** Myself, or anyone who needs help losing weight
+- **R &mdash; Requirements:** Needs to be as convenient as possible; I want to be able to look down at my phone and log and track where I'm at today, this week, and this month. The tool needs to track how many more calories I need to lose to achieve my goal of a certain amount of fat loss and automatically adjust when I submit a new meal or snack.
+- **G &mdash; Guardrails:** This needs to be a private tool for the user to see and track. This information can never go public, it has to be secure. 
+- **E &mdash; Experience:** Main character, disciplined, gym, goals, healthy. Looks like a useful gym or nutritional tool for a man. Should be motivational, inspiring, and cool to use. 
+- **T &mdash; Test:** Does it track my calories accurately? Does the goal tracker finish line work? Can the user access, use, and save the tool for daily repeated use? 
 
 ---
 
